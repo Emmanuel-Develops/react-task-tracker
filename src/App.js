@@ -2,8 +2,10 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import PhText from "./components/PhText";
+import AddTask from "./components/AddTask";
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -19,6 +21,13 @@ function App() {
     },
   ]);
 
+  // Add Task
+  const addTask = (task) => {
+    const taskId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
+    const newTask = { ...task, id: taskId };
+    setTasks([...tasks, newTask]);
+  };
+
   // Delete Task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -33,9 +42,15 @@ function App() {
     );
   };
 
+  // Toggle Add
+  const toggleAdd = () => {
+    setShowAddTask(!showAddTask);
+  };
+
   return (
     <div className="container">
-      <Header />
+      <Header toggleAddTask={toggleAdd} showAddTask={showAddTask} />
+      {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
       ) : (
