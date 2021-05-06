@@ -7,7 +7,7 @@ const Header = ({ title, toggleAddTask, showAddTask }) => {
   return (
     <header className="header">
       <h1>{title}</h1>
-      <Button onClick={() => toggleAddTask(!showAddTask)} color={showAddTask ? "red" : "green"} text={showAddTask ? "Close" : "Add"} />
+      <Button onClick={() => toggleAddTask()} color={showAddTask ? "red" : "green"} text={showAddTask ? "Close" : "Add"} />
     </header>
   );
 };
@@ -19,7 +19,7 @@ Header.defaultProps = {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   showAddTask: PropTypes.bool.isRequired,
-  toggleAddTask: PropTypes.func
+  toggleAddTask: PropTypes.func,
 };
 // CSS IN JS
 // const headerStyle = {
